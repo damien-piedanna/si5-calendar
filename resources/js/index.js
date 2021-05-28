@@ -3,62 +3,65 @@
 
   let nbDay = 5;
   let nbSlotPerDay = 2;
-  let mineurs, options;
+  let minors, options;
 
   $(document).ready(function() {
 
-    loadPartie(1);
+    loadPart(1);
 
-    //Choosing partie
-    $('#select-partie').change(function() {
-      loadPartie($(this).val());
+    //Choosing part
+    $('#select-part').change(function() {
+      loadPart($(this).val());
     });
 
-    //Choosing mineur
-    $('#select-mineur').change(function() {
-      $('.mineur').remove();
+    //Choosing minor
+    $('#select-minor').change(function() {
+      $('.minor').remove();
       $('.select-option').removeAttr('disabled');
-      if (this.value != '') loadCourse(this.value, 'mineur', mineurs[this.value]);
+      if (this.value != '') addCourse(this.value, 'minor', minors[this.value]);
     });
 
     //Choosing option
     $('.select-option').change(function() {
       let slot = $(this).data('slot');
       removeOptionSlot(slot);
-      if (this.value != '') loadCourse(this.value, 'option', options[this.value]);
+      if (this.value != '') addCourse(this.value, 'option', options[this.value]);
     });
   });
 
   /*
-  * Loading partie
+  * Loading part
   */
-  function loadPartie(index) {
-    let choosed_mineur = $('#select-mineur').val();
-    $('#select-mineur > option:not(:first-child)').remove();
+  function loadPart(index) {
+    //reseting infos
+    let choosed_minor = $('#select-minor').val();
+    $('#select-minor > option:not(:first-child)').remove();
     $('.select-option > option:not(:first-child)').remove();
     $('.select-option').removeAttr('disabled');
     $('.event').remove();
 
-    let partie = index;
-    mineurs = $.parseJSON(mineurs_data)[partie];
-    loadMineurSelect(mineurs);
-    options = $.parseJSON(options_data)[partie];
+    //Loading minors and options
+    let part = index;
+    minors = $.parseJSON(minors_data)[part];
+    loadMinorSelect(minors);
+    options = $.parseJSON(options_data)[part];
     loadOptionSelect(options);
 
-    $('#select-mineur').val(choosed_mineur).change();
+    //Keep choosed minor
+    $('#select-minor').val(choosed_minor).change();
   }
 
   /*
-  * Loading mineur select
+  * Loading minor select
   */
-  function loadMineurSelect(mineurs) {
-    mineurs.forEach((mineur, index) => {
-      $('#select-mineur').append('<option value="' + index + '">' + mineur.name + '</option>');
+  function loadMinorSelect(minors) {
+    minors.forEach((minor, index) => {
+      $('#select-minor').append('<option value="' + index + '">' + minor.name + '</option>');
     });
   }
 
   /*
-  * Loading mineur select
+  * Loading options selects
   */
   function loadOptionSelect(options) {
     let slot = 0;
@@ -71,34 +74,20 @@
   /*
   * Load a course
   */
-  function loadCourse(index, type, course) {
+  function addCourse(index, type, course) {
     for (let i = 0; i < nbDay * nbSlotPerDay; i++) {
       if (course.schedule[i]) {
-        addSlot(index, i, type, course.name);
+        addCourseSlot(index, i, type, course.name);
       }
     }
   }
 
   /*
-  * Unload a course
-  */
-  function removeOptionSlot(slot) {
-    $('td[slot="' + slot + '"] > .option').remove();
-  }
-
-  /*
-  * Unload a course
-  */
-  function unloadCourse(index, type) {
-    $('.' + type + '-' + index).remove();
-  }
-
-  /*
   * Add a course slot
   */
-  function addSlot(index, slot, type, name) {
+  function addCourseSlot(index, slot, type, name) {
     $('td[slot="' + slot + '"]').append('<div class="event cours ' + type + ' ' + type + '-' + index + '">' + name + '</div>');
-    if (type == 'mineur') {
+    if (type == 'minor') {
       $('.select-option[data-slot="' + slot + '"]').each(function() {
         let select = $(this);
         if (select.val() != '') {
@@ -108,5 +97,12 @@
         select.attr('disabled', 'disabled')
       });
     }
+  }
+
+  /*
+  * Remove a course
+  */
+  function removeOptionSlot(slot) {
+    $('td[slot="' + slot + '"] > .option').remove();
   }
 })();

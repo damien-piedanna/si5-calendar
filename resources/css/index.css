@@ -1,30 +1,32 @@
+/* MAIN */
+
 body {
   flex-direction: column;
   display: flex;
   align-items: center;
   align-content: center;
   font-family: "DINPro", "Helvetica Neue", sans-serif;
-  padding: 3rem;
+  padding: 3vh;
   margin: 0;
   background: #fafafa;
   box-sizing: border-box;
-  height: 100vh;
 }
 
-.outer {
-  position:relative;
+.user-options {
+  width: 65vw;
 }
+
+/* CALANDAR */
 
 .calendar {
   margin: 0 auto;
-  max-width: 1280px;
-  min-width: 500px;
-
+  width: 65vw;
   box-shadow: 0px 30px 50px rgba(0, 0, 0, 0.2) ,0px 3px 7px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
+
 thead {
-    box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
 }
 
 thead th {
@@ -46,9 +48,9 @@ header {
 }
 
 header h1 {
- font-size: 1.25rem;
- text-align: center;
- font-weight: normal;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: normal;
 }
 
 tbody {
@@ -86,17 +88,19 @@ thead th {
 }
 
 thead {
-    z-index: 2;
-    background: white;
-    border-bottom: 2px solid #ddd;
+  z-index: 2;
+  background: white;
+  border-bottom: 2px solid #ddd;
 }
 
 tr, tr td {
   height: 20px;
 }
+
 td {
   text-align: center;
 }
+
 tr:nth-child(odd) td:not(.headcol) {
   border-bottom: 1px solid #e8e8e8;
 }
@@ -120,9 +124,7 @@ tbody tr td {
   width: auto;
 }
 
-.secondary {
-  color: rgba(0, 0, 0, 0.4);
-}
+/* EVENT */
 
 .event {
   color: white;
@@ -133,7 +135,6 @@ tbody tr td {
   padding: 0.5rem;
   overflow-x: hidden;
   transition: all 0.2s;
-  cursor: pointer;
 }
 
 .event:hover {
@@ -145,7 +146,7 @@ tbody tr td {
   height: 400%;
 }
 
-.event.mineur {
+.event.minor {
   background: #00B4FC;
 }
 
