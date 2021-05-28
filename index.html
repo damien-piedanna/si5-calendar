@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>SI5 Calendar</title>
+  <link rel="icon" href="resources/img/favicon.ico">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="description" content="Calculate an itinerary using the bicycles offered by JC Decaux">
+  <meta name="keywords" content="Bike, Itinerary, JCDecaux">
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="resources/css/index.css" rel="stylesheet" />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+  <script src="resources/js/data.js"></script>
+  <script src="resources/js/index.js"></script>
+</head>
+
+<body>
+  <div class="mb-2 w-50">
+    <div class="row justify-content-md-center mb-5">
+      <div class="col-md-6">
+        <select id="select-mineur" class="form-select">
+          <option selected value="-1">Choisissez votre mineur...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p class="day">Lundi:</p>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="0">
+          <option selected value>Matin...</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="1">
+          <option selected value>Après-midi...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p class="day">Mardi:</p>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="2">
+          <option selected value>Matin...</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="3">
+          <option selected value>Après-midi...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p class="day">Mercredi:</p>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="4">
+          <option selected value>Matin...</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="5">
+          <option selected value>Après-midi...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p class="day">Jeudi:</p>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="6">
+          <option selected value>Matin...</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="7">
+          <option selected value>Après-midi...</option>
+        </select>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-2">
+        <p class="day">Vendredi:</p>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="8">
+          <option selected value>Matin...</option>
+        </select>
+      </div>
+      <div class="col-md-5">
+        <select class="select-option form-select" data-slot="9">
+          <option selected value>Après-midi...</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="calendar">
+    <div class="outer">
+      <table>
+        <thead>
+          <tr>
+            <th>Lundi</th>
+            <th>Mardi</th>
+            <th>Mercredi</th>
+            <th>Jeudi</th>
+            <th>Vendredi</th>
+          </tr>
+        </thead>
+      </table>
+      <div class="wrap">
+        <table class="offset">
+          <tbody>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">8:00</td>
+              <td slot="0"></td>
+              <td slot="2"></td>
+              <td slot="4"></td>
+              <td slot="6"></td>
+              <td slot="8"></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">10:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">12:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">14:00</td>
+              <td slot="1"></td>
+              <td slot="3"></td>
+              <td slot="5"></td>
+              <td slot="7"></td>
+              <td slot="9"></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">16:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol">18:00</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td class="headcol"></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
