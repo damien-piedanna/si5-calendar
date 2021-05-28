@@ -3,28 +3,47 @@
 
   let nbDay = 5;
   let nbSlotPerDay = 2;
+  let mineurs, options;
 
   $(document).ready(function() {
-    mineurs = $.parseJSON(mineurs).courses;
-    loadMineurSelect(mineurs);
-    options = $.parseJSON(options).courses;
-    loadOptionCheckbox(options);
+
+    loadPartie(1);
+
+    //Choosing partie
+    $('#select-partie').change(function() {
+      loadPartie($(this).val());
+    });
 
     //Choosing mineur
     $('#select-mineur').change(function() {
       $('.mineur').remove();
       $('.select-option').removeAttr('disabled');
-      if (this.value > -1) loadCourse(this.value, 'mineur', mineurs[this.value]);
-
+      if (this.value != '') loadCourse(this.value, 'mineur', mineurs[this.value]);
     });
 
     //Choosing option
     $('.select-option').change(function() {
       let slot = $(this).data('slot');
       removeOptionSlot(slot);
-      if (this.value > -1) loadCourse(this.value, 'option', options[this.value]);
+      if (this.value != '') loadCourse(this.value, 'option', options[this.value]);
     });
   });
+
+  /*
+  * Loading partie
+  */
+  function loadPartie(index) {
+    $("#select-mineur > option:not(:first-child)").remove();
+    $(".select-option > option:not(:first-child)").remove();
+    $('.select-option').removeAttr('disabled');
+    $('.event').remove();
+
+    let partie = index;
+    mineurs = $.parseJSON(mineurs_data)[partie];
+    loadMineurSelect(mineurs);
+    options = $.parseJSON(options_data)[partie];
+    loadOptionSelect(options);
+  }
 
   /*
   * Loading mineur select
@@ -38,7 +57,7 @@
   /*
   * Loading mineur select
   */
-  function loadOptionCheckbox(options) {
+  function loadOptionSelect(options) {
     let slot = 0;
     options.forEach((option, index) => {
       if (option.schedule[slot] == 0) slot++;
