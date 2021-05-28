@@ -33,8 +33,9 @@
   * Loading partie
   */
   function loadPartie(index) {
-    $("#select-mineur > option:not(:first-child)").remove();
-    $(".select-option > option:not(:first-child)").remove();
+    let choosed_mineur = $('#select-mineur').val();
+    $('#select-mineur > option:not(:first-child)').remove();
+    $('.select-option > option:not(:first-child)').remove();
     $('.select-option').removeAttr('disabled');
     $('.event').remove();
 
@@ -43,6 +44,8 @@
     loadMineurSelect(mineurs);
     options = $.parseJSON(options_data)[partie];
     loadOptionSelect(options);
+
+    $('#select-mineur').val(choosed_mineur).change();
   }
 
   /*
