@@ -7,6 +7,9 @@
 
   $(document).ready(function() {
 
+    minors = $.parseJSON(minors_data)['minors'];
+    loadMinorSelect(minors);
+
     loadPart(1);
 
     //Choosing part
@@ -16,9 +19,13 @@
 
     //Choosing minor
     $('#select-minor').change(function() {
+      let value = this.value;
       $('.minor').remove();
       $('.select-option').removeAttr('disabled');
-      if (this.value != '') addCourse(this.value, 'minor', minors[this.value]);
+
+      options.forEach(function(option, index) {
+        if (option.minor.toString().split(',').includes(value)) addCourse(value, 'minor', options[index]);
+      });
     });
 
     //Choosing option
@@ -35,15 +42,12 @@
   function loadPart(index) {
     //reseting infos
     let choosed_minor = $('#select-minor').val();
-    $('#select-minor > option:not(:first-child)').remove();
     $('.select-option > option:not(:first-child)').remove();
     $('.select-option').removeAttr('disabled');
     $('.event').remove();
 
-    //Loading minors and options
+    //Loading options
     let part = index;
-    minors = $.parseJSON(minors_data)[part];
-    loadMinorSelect(minors);
     options = $.parseJSON(options_data)[part];
     loadOptionSelect(options);
 
@@ -56,7 +60,8 @@
   */
   function loadMinorSelect(minors) {
     minors.forEach((minor, index) => {
-      $('#select-minor').append('<option value="' + index + '">' + minor.name + '</option>');
+      console.log('<option value="' + index + '">' + minor + '</option>');
+      $('#select-minor').append('<option value="' + index + '">' + minor + '</option>');
     });
   }
 
@@ -67,7 +72,7 @@
     let slot = 0;
     options.forEach((option, index) => {
       if (option.schedule[slot] == 0) slot++;
-      $('.select-option[data-slot="' + slot + '"]').append('<option value="' + index + '">' + option.name + '</option>');
+      $('.select-option[data-slot="' + slot + '"]').append('<option value="' + index + '">' + '[' + (option.minor != -1 ? minors[option.minor] : "Option") + '] ' + option.name + '</option>');
     });
   }
 
@@ -77,7 +82,7 @@
   function addCourse(index, type, course) {
     for (let i = 0; i < nbDay * nbSlotPerDay; i++) {
       if (course.schedule[i]) {
-        addCourseSlot(index, i, type, course.name);
+        addCourseSlot(index, i, type, '[' +  (course.minor != -1 ? minors[course.minor] : "Option") + '] ' + course.name + ' (' + course.code + ')');
       }
     }
   }
